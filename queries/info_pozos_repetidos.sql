@@ -1,0 +1,4 @@
+SELECT sigla, area, cod_area, empresa, yacimiento, cod_yacimiento, formacion, cuenca, provincia, cota, profundidad, clasificacion, subclasificacion, tipo_recurso, sub_tipo_recurso, gasplus, tipopozo, tipoextraccion, tipoestado, geom, adjiv_fecha_inicio_perf, adjiv_fecha_fin_perf, adjiv_fecha_inicio_term, adjiv_fecha_fin_term, geojson, COUNT(*)
+FROM public.info_pozos
+GROUP BY sigla, area, cod_area, empresa, yacimiento, cod_yacimiento, formacion, cuenca, provincia, cota, profundidad, clasificacion, subclasificacion, tipo_recurso, sub_tipo_recurso, gasplus, tipopozo, tipoextraccion, tipoestado, geom, adjiv_fecha_inicio_perf, adjiv_fecha_fin_perf, adjiv_fecha_inicio_term, adjiv_fecha_fin_term, geojson
+HAVING COUNT(*)>1;
