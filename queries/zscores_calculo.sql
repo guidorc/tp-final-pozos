@@ -22,7 +22,13 @@ GROUP BY idpozo
 ORDER BY mediana_zscore DESC
 LIMIT 100;
 
-SELECT idpozo, prod_pet, fecha_data
+--- Promedio y desvío standard de producción de petroleo
+SELECT AVG(prod_pet::numeric) as mediana_pet, STDDEV(prod_pet::numeric) as std_pet
+FROM produccion_2024
+WHERE prod_pet::numeric > 0;
+
+--- Analisis pozo particular
+SELECT idpozo, prod_pet::numeric, fecha_data
 FROM produccion_2024
 WHERE idpozo = '164941';
 
@@ -49,3 +55,14 @@ FROM zscore_calculation
 GROUP BY idpozo
 ORDER BY mediana_zscore DESC
 LIMIT 100;
+
+--- Análisis pozos outliers
+SELECT idpozo, prod_gas::numeric, provincia, areayacimiento, cuenca
+FROM produccion_2024
+WHERE idpozo IN ('10464', '10465', '154796')
+GROUP BY idpozo, prod_gas::numeric, provincia, areayacimiento, cuenca;
+
+--- Promedio y desvío standard de producción de gas
+SELECT AVG(prod_gas::numeric) as mediana_gas, STDDEV(prod_pet::numeric) as std_gas
+FROM produccion_2024
+WHERE prod_gas::numeric > 0;
